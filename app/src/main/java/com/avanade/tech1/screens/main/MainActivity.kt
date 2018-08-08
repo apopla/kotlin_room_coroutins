@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         books_recycler.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = booksAdapter
         }
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
