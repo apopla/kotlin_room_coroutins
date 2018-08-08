@@ -8,6 +8,7 @@ import com.avanade.tech1.database.AuthorDao
 import com.avanade.tech1.database.BookDao
 import com.avanade.tech1.model.Author
 import com.avanade.tech1.model.Book
+import com.avanade.tech1.screens.details.DetailsViewModel
 import com.avanade.tech1.screens.main.MainViewModel
 import dagger.Component
 import dagger.Module
@@ -35,10 +36,11 @@ class ServiceModule(val app: Application) {
     fun authorDao(database: TechDatabase) = database.authorDao()
 }
 
+@Singleton
 @Component(modules = [ServiceModule::class])
 interface AppComponent {
     fun inject(viewModel: MainViewModel)
-
+    fun inject(viewModel: DetailsViewModel)
     fun bookDao(): BookDao
     fun authorDao(): AuthorDao
 }
