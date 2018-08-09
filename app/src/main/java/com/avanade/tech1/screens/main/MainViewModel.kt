@@ -27,4 +27,12 @@ class MainViewModel: ViewModel() {
         pickedBookId.value = id
     }
 
+    fun sortBy(field: String){
+        //todo add sorting by author name
+        if(field == "name"){
+            launch(Tech1App.databaseCoroutineContext) { (books as MutableLiveData).postValue(bookDao.loadBooksByName()) }
+        }
+        else if (field == "yearPublished"){launch(Tech1App.databaseCoroutineContext) { (books as MutableLiveData).postValue(bookDao.loadBooksByPublishedYear()) } }
+    }
+
 }

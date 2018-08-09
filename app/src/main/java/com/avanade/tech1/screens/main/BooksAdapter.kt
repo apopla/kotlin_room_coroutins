@@ -1,6 +1,7 @@
 package com.avanade.tech1.screens.main
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,9 @@ class BooksAdapter(private val clickListener: (Int) -> Unit): RecyclerView.Adapt
     }
 
     fun update(newBooks: List<Book>) {
+        Log.d("BooksAdapter", "update" + newBooks.size)
+        Log.d("BooksAdapter", "update first item" + newBooks[0].name)
+
         books.clear()
         books.addAll(newBooks)
         notifyDataSetChanged()

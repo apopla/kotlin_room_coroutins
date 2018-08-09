@@ -17,6 +17,16 @@ interface BookDao {
     fun loadBooksByAuthor(authorId: Int): List<Book>
 
 
+//todo this should work but doesnt, wonder why
+    @Query("SELECT * FROM Book ORDER BY :field ASC")
+    fun loadBooksByOrder(field: String): List<Book>
+
+    @Query("SELECT * FROM Book ORDER BY name ASC")
+    fun loadBooksByName(): List<Book>
+
+    @Query("SELECT * FROM Book ORDER BY yearPublished ASC")
+    fun loadBooksByPublishedYear(): List<Book>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(book: Book)
 
