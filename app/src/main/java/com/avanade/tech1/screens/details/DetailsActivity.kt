@@ -47,13 +47,13 @@ class DetailsActivity : AppCompatActivity() {
 
     }
 
-    fun loadUiWithBookData(book: Book){
+    private fun loadUiWithBookData(book: Book){
         book_title.text = book.name
         description.text = book.description
         year_published.text = book.yearPublished.toString()
     }
 
-    fun loadUiWithAuthorData(author: Author){
+    private fun loadUiWithAuthorData(author: Author){
         author_name.text = author.firstName + " " + author.lastName
     }
 
