@@ -3,6 +3,7 @@ package com.avanade.tech1.screens.main
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.util.Log
 import com.avanade.tech1.Tech1App
 import com.avanade.tech1.database.BookDao
 import com.avanade.tech1.model.Book
@@ -14,6 +15,7 @@ class MainViewModel: ViewModel() {
     @Inject lateinit var bookDao: BookDao
 
     val books: LiveData<List<Book>> = MutableLiveData()
+    val pickedBookId = MutableLiveData<Int>()
 
     init {
         Tech1App.appComponent.inject(this)
@@ -22,7 +24,7 @@ class MainViewModel: ViewModel() {
     }
 
     fun bookClicked(id: Int) {
-
+        pickedBookId.value = id
     }
 
 }

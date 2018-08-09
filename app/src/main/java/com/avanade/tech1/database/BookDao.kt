@@ -10,6 +10,9 @@ interface BookDao {
     @Query("SELECT * FROM Book")
     fun all(): List<Book>
 
+    @Query("SELECT * FROM Book WHERE id = :id ")
+    fun loadSingleBook(id: Int): Book
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(book: Book)
 
@@ -22,6 +25,9 @@ interface AuthorDao {
 
     @Query("SELECT * FROM Author")
     fun all(): List<Author>
+
+    @Query("SELECT * FROM Author WHERE id = :id ")
+    fun loadSingleAuthor(id: Int): Author
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(author: Author)
