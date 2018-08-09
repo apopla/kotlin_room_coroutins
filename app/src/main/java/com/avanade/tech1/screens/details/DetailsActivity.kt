@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.avanade.tech1.R
 import kotlinx.android.synthetic.main.activity_details.*
-import android.R.attr.defaultValue
 import android.arch.lifecycle.Observer
 import com.avanade.tech1.model.Author
 import com.avanade.tech1.model.Book
 import com.avanade.tech1.screens.main.MainActivity
+import android.support.v7.app.AlertDialog
+import android.widget.ArrayAdapter
+
+
 
 
 /**
@@ -39,10 +42,15 @@ class DetailsActivity : AppCompatActivity() {
         viewModel.author.observe(this, Observer {
             it?.let {
                 loadUiWithAuthorData(it)
-                author_name.setOnClickListener{_ -> displayDialog(it)}
+                author_name.setOnClickListener{_ -> viewModel.authorClicked(it.id)}
             }
         })
 
+        viewModel.booksByAuthor.observe(this, Observer {
+            it?.let {
+                displayDialog(it)
+            }
+        })
 
 
     }
@@ -57,7 +65,15 @@ class DetailsActivity : AppCompatActivity() {
         author_name.text = author.firstName + " " + author.lastName
     }
 
-    fun displayDialog (author: Author){
+    fun displayDialog(bookList: List<Book>){
+        val builderSingle = AlertDialog.Builder(this@DetailsActivity)
+        builderSingle.setTitle("Books:")
 
+        val arrayAdapter = ArrayAdapter<String>(this@DetailsActivity, android.R.layout.select_dialog_item)
+
+        bookList.forEach{arrayAdapter.add(it.name)}
+
+        builderSingle.setAdapter(arrayAdapter, null)
+        builderSingle.show()
     }
 }

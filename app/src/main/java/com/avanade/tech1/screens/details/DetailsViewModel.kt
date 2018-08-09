@@ -22,6 +22,7 @@ class DetailsViewModel: ViewModel() {
     lateinit var bookDao: BookDao
 
     val book: LiveData<Book> = MutableLiveData()
+    val booksByAuthor: LiveData<List<Book>> = MutableLiveData()
     val author: LiveData<Author> = MutableLiveData()
 
     init {
@@ -37,6 +38,11 @@ class DetailsViewModel: ViewModel() {
     fun getAuthor (authorId: Int){
         launch(Tech1App.databaseCoroutineContext) {
             (author as MutableLiveData).postValue(authorDao.loadSingleAuthor(authorId)) }
+    }
+
+    fun authorClicked(authorId: Int){
+        launch(Tech1App.databaseCoroutineContext) {
+            (booksByAuthor as MutableLiveData).postValue(bookDao.loadBooksByAuthor(authorId)) }
     }
 
 

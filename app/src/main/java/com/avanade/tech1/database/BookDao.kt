@@ -13,6 +13,10 @@ interface BookDao {
     @Query("SELECT * FROM Book WHERE id = :id ")
     fun loadSingleBook(id: Int): Book
 
+    @Query("SELECT * FROM Book WHERE authorId = :authorId ")
+    fun loadBooksByAuthor(authorId: Int): List<Book>
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(book: Book)
 
